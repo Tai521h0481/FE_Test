@@ -53,6 +53,8 @@ import { AboutPage } from '../pages/About.tsx';
 import EventsDashboardPage from '../pages/dashboards/Events.tsx';
 import EventsListPage from '../pages/dashboards/EventsList.tsx';
 import EventDetailsPage from '../pages/details/EventDetailsPage.tsx';
+import EditEventPage from '../pages/edit/EditEventPage.tsx';
+import ParticipatedEventsPage from '../pages/dashboards/ParticipatedEvents.tsx';
 
 // Custom scroll restoration function
 export const ScrollToTop: React.FC = () => {
@@ -110,15 +112,14 @@ const router = createBrowserRouter([
     ],
   },
   {
-    // details/events
     path: '/details',
     element: <PageWrapper children={<EventDetailLayout />} />,
     errorElement: <ErrorPage />,
     children: [
       {
         index: true,
-        path: 'events/:id', // Path cho trang chi tiết sự kiện
-        element: <EventDetailsPage />, // Sử dụng đúng component DetailEventPage (đã rename)
+        path: 'events/:id',
+        element: <EventDetailsPage />,
       },
       {
         path: 'my-events/:id',
@@ -131,6 +132,10 @@ const router = createBrowserRouter([
     element: <PageWrapper children={<DashboardLayout />} />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: 'participated-events',  // Add route for participated events page
+        element: <ParticipatedEventsPage />,
+      },
       {
         index: true,
         path: 'default',
@@ -281,6 +286,17 @@ const router = createBrowserRouter([
       {
         path: 'account-delete',
         element: <AccountDeactivePage />,
+      },
+    ],
+  },
+  {
+    path: '/edit', // Add route for edit event page
+    element: <PageWrapper children={<DashboardLayout />} />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'events/:id',
+        element: <EditEventPage />, // Use EditEventPage component
       },
     ],
   },
