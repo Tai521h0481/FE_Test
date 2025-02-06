@@ -1,4 +1,6 @@
+// src\routes\routes.tsx
 import { createBrowserRouter, useLocation } from 'react-router-dom';
+
 import {
   AccountDeactivePage,
   BiddingDashboardPage,
@@ -16,6 +18,7 @@ import {
   Error500Page,
   Error503Page,
   ErrorPage,
+  HomePage,
   MarketingDashboardPage,
   PasswordResetPage,
   ProjectsDashboardPage,
@@ -39,20 +42,20 @@ import {
   DetailEventPage,
   MyEventDashboardPage,
   DetailMyEventPage,
-  UserDashboardPage
+  UserDashboardPage,
+  SpeakerFormPage,
+  UserProfilePage // import UserProfilePage
 } from '../pages';
 import {
   CorporateLayout,
   DashboardLayout,
   EventDetailLayout,
-  // GuestLayout,
+  GuestLayout,
   UserAccountLayout,
 } from '../layouts';
 import React, { ReactNode, useEffect } from 'react';
 import { AboutPage } from '../pages/About.tsx';
 import EventsDashboardPage from '../pages/dashboards/Events.tsx';
-import EventsListPage from '../pages/dashboards/EventsList.tsx';
-import EventDetailsPage from '../pages/details/EventDetailsPage.tsx';
 import EditEventPage from '../pages/edit/EditEventPage.tsx';
 import ParticipatedEventsPage from '../pages/dashboards/ParticipatedEvents.tsx';
 
@@ -89,13 +92,13 @@ const PageWrapper = ({ children }: PageProps) => {
 const router = createBrowserRouter([
   {
     path: '/',
-    // element: <PageWrapper children={<GuestLayout />} />,
+    element: <PageWrapper children={<GuestLayout />} />,
     errorElement: <ErrorPage />,
     children: [
       {
         index: true,
-        path: '',
-        element: <SignInPage />,
+        path: 'events/:id',
+        element: <EventDetailsPage />,
       },
     ],
   },
@@ -112,6 +115,7 @@ const router = createBrowserRouter([
     ],
   },
   {
+    // details/events
     path: '/details',
     element: <PageWrapper children={<EventDetailLayout />} />,
     errorElement: <ErrorPage />,
@@ -119,7 +123,7 @@ const router = createBrowserRouter([
       {
         index: true,
         path: 'events/:id',
-        element: <EventDetailsPage />,
+        element: <DetailEventPage />,
       },
       {
         path: 'my-events/:id',
@@ -132,7 +136,7 @@ const router = createBrowserRouter([
     element: <PageWrapper children={<DashboardLayout />} />,
     errorElement: <ErrorPage />,
     children: [
-      {
+       {
         path: 'participated-events',  // Add route for participated events page
         element: <ParticipatedEventsPage />,
       },
@@ -162,6 +166,18 @@ const router = createBrowserRouter([
         element: <SocialDashboardPage />,
       },
       {
+        path: 'bidding',
+        element: <BiddingDashboardPage />,
+      },
+      {
+        path: 'learning',
+        element: <LearningDashboardPage />,
+      },
+      {
+        path: 'logistics',
+        element: <LogisticsDashboardPage />,
+      },
+      {
         path: 'my-events',
         element: <MyEventDashboardPage />,
       },
@@ -169,9 +185,9 @@ const router = createBrowserRouter([
         path: 'users',
         element: <UserDashboardPage />,
       },
-      {
-        path: 'events-list',
-        element: <EventsListPage />,
+       {
+        path: 'user-profile', // Add user profile route here
+        element: <UserProfilePage />,
       },
     ],
   },
@@ -338,6 +354,16 @@ const router = createBrowserRouter([
       },
     ],
   },
+   {
+    path: '/speaker-form', // add new route here
+    element: <PageWrapper children={<DashboardLayout />} />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        path: '',
+        element: <SpeakerFormPage />,
+      },
+    ],
+  },
 ]);
-
-export default router;
