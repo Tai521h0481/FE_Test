@@ -56,7 +56,8 @@ import {
 import React, { ReactNode, useEffect } from 'react';
 import { AboutPage } from '../pages/About.tsx';
 import EventsDashboardPage from '../pages/dashboards/Events.tsx';
-
+import EditEventPage from '../pages/edit/EditEventPage.tsx';
+import ParticipatedEventsPage from '../pages/dashboards/ParticipatedEvents.tsx';
 
 // Custom scroll restoration function
 export const ScrollToTop: React.FC = () => {
@@ -96,8 +97,8 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        path: '',
-        element: <HomePage />,
+        path: 'events/:id',
+        element: <EventDetailsPage />,
       },
     ],
   },
@@ -135,6 +136,10 @@ const router = createBrowserRouter([
     element: <PageWrapper children={<DashboardLayout />} />,
     errorElement: <ErrorPage />,
     children: [
+       {
+        path: 'participated-events',  // Add route for participated events page
+        element: <ParticipatedEventsPage />,
+      },
       {
         index: true,
         path: 'default',
@@ -301,6 +306,17 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: '/edit', // Add route for edit event page
+    element: <PageWrapper children={<DashboardLayout />} />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'events/:id',
+        element: <EditEventPage />, // Use EditEventPage component
+      },
+    ],
+  },
+  {
     path: 'errors',
     errorElement: <ErrorPage />,
     children: [
@@ -351,5 +367,3 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-export default router;

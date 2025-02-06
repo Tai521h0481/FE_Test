@@ -1,3 +1,4 @@
+// src\pages\authentication\SignIn.tsx
 import React, { useState } from 'react';
 import {
   Button,
@@ -177,7 +178,7 @@ export const SignInPage = () => {
                     { required: true, message: 'Please input your password!' },
                   ]}
                 >
-                  <Input.Password />
+                  <Input.Password autoComplete="current-password" />
                 </Form.Item>
               </Col>
             </Row>
