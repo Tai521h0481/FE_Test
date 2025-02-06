@@ -58,11 +58,15 @@ export const SignInPage = () => {
         // Lưu token vào localStorage
         localStorage.setItem('accessToken', response.data.accessToken);
 
+        console.log('Access Token:', response.data.accessToken);
+
         // Lưu thông tin người dùng vào localStorage
         localStorage.setItem('user', JSON.stringify(response.data.user));
 
         // dispatch action để lưu vào Redux store
         dispatch(setUser(response.data.user));
+
+        console.log('Access User:', response.data.user);
 
         setTimeout(() => {
           navigate(PATH_DASHBOARD.default);

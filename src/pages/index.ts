@@ -7,3 +7,4 @@ export * from './authentication';
 export * from './errors';
 export * from './create';
 export * from './details';
+export * from './forms';
